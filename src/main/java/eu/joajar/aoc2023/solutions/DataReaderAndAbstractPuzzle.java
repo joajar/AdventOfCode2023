@@ -23,6 +23,11 @@ public abstract class DataReaderAndAbstractPuzzle {
 
     public String[] getDataAsArrayOfDataFileLines() {
         BufferedReader bufferedReader = null;
+
+        if (!fileName.startsWith("src/")) {
+            return fileName.split("\\n");
+        }
+
         try {
             bufferedReader = new BufferedReader(new FileReader(fileName));
             String row;

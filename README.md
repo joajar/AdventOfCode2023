@@ -9,7 +9,7 @@ I hope you will like my solutions, if so &minus; give a star to this repository 
 
 Current status of my work:
 
-![](https://badgen.net/badge/01/%E2%98%85/blue)
+![](https://badgen.net/badge/01/%E2%98%85%E2%98%85/blue)
 
 #### Table of contents: ####
 
