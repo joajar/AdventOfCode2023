@@ -14,4 +14,14 @@ public class Solution02Test {
     public void firstPartOfSolution02WithFinalDataTest() {
         assertEquals("2563", new Solution02("src/main/resources/Input02.txt").solveFirstPart());
     }
+
+    @Test
+    public void secondPartOfSolution02Test() {
+        assertEquals("2286", new Solution02("src/test/resources/Input02.txt").solveSecondPart());
+    }
+
+    @Test
+    public void secondPartOfSolution02WithFinalDataTest() {
+        assertEquals("70768", new Solution02("src/main/resources/Input02.txt").solveSecondPart());
+    }
 }

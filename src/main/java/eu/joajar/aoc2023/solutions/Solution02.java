@@ -2,6 +2,7 @@ package eu.joajar.aoc2023.solutions;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Solution02 extends DataReaderAndAbstractPuzzle {
     public Solution02(String fileName) {
@@ -25,7 +26,11 @@ public class Solution02 extends DataReaderAndAbstractPuzzle {
 
     @Override
     public String solveSecondPart() {
-        return null;
+        final int sumOfPowersOfSetsMinimalPossibleCardinalities = getDataAsStreamOfDataFileLines()
+                .map(Game::transformStringIntoGame)
+                .mapToInt(Game::getPowerOfSetsMinimalPossibleCardinalitiesFor)
+                .sum();
+        return String.valueOf(sumOfPowersOfSetsMinimalPossibleCardinalities);
     }
 
     private record Cubes(int number, Color color) {
@@ -75,9 +80,29 @@ public class Solution02 extends DataReaderAndAbstractPuzzle {
         private static String[] splitString(String aString) {
             return aString.split("\\s");
         }
+
+        private static int getPowerOfSetsMinimalPossibleCardinalitiesFor(Game game) {
+            return Color
+                    .stream()
+                    .mapToInt(colorEnum -> getMaximalNumberOfCubesOfGivenColor(game, colorEnum))
+                    .reduce((a,b) -> a*b)
+                    .orElse(0);
+        }
     }
 
     private enum Color {
-        BLUE, GREEN, RED
+        BLUE, GREEN, RED;
+
+        private static Stream<Color> stream() {
+            return Stream.of(Color.values());
+        }
+    }
+
+    private static int getMaximalNumberOfCubesOfGivenColor(Game game, Color givenColorEnum) {
+        return game.listOfCubes.stream()
+                .filter(cubes -> givenColorEnum == cubes.color)
+                .mapToInt(cubes -> cubes.number)
+                .max()
+                .orElse(0);
     }
 }
