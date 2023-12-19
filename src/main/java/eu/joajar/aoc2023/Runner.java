@@ -3,6 +3,7 @@ package eu.joajar.aoc2023;
 import eu.joajar.aoc2023.solutions.DataReaderAndAbstractPuzzle;
 import eu.joajar.aoc2023.solutions.Solution01;
 import eu.joajar.aoc2023.solutions.Solution02;
+import eu.joajar.aoc2023.solutions.Solution04;
 
 import java.util.List;
 
@@ -12,7 +13,8 @@ public class Runner {
 
     private static final List<DataReaderAndAbstractPuzzle> PUZZLES = List.of(
             new Solution01("src/main/resources/Input01.txt"),
-            new Solution02("src/main/resources/Input02.txt")
+            new Solution02("src/main/resources/Input02.txt"),
+            new Solution04("src/main/resources/Input04.txt")
     );
 
     public static void main(String[] args) {
