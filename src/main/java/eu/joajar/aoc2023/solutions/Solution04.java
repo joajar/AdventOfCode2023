@@ -1,9 +1,12 @@
 package eu.joajar.aoc2023.solutions;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Solution04 extends DataReaderAndAbstractPuzzle {
     public Solution04(String fileName) {
@@ -25,12 +28,13 @@ public class Solution04 extends DataReaderAndAbstractPuzzle {
         return String.valueOf(totalNumberOfPoints);
     }
 
-    private record Card(Set<Integer> winningNumbers, Set<Integer> myNumbers) {
+    private record Card(int cardIndex, Set<Integer> winningNumbers, Set<Integer> myNumbers) {
         private static Card transform(String aString) {
             final var indexOfColon = aString.indexOf(":");
             final var indexOfPipe = aString.indexOf("|");
 
             return new Card(
+                    Integer.parseInt(aString.substring(0, indexOfColon).replaceAll("\\D","")),
                     formSetOfIntegers(aString.substring(indexOfColon + 1, indexOfPipe)),
                     formSetOfIntegers(aString.substring(indexOfPipe + 1))
             );
@@ -61,6 +65,36 @@ public class Solution04 extends DataReaderAndAbstractPuzzle {
 
     @Override
     public String solveSecondPart() {
-        return null;
+        long totalNumberOfScratchcards = calculateTotalNumberOfScratchcards()
+                .values()
+                .stream()
+                .reduce(Integer::sum)
+                .orElse(0);
+
+        return String.valueOf(totalNumberOfScratchcards);
+    }
+
+    private Map<Integer, Integer> calculateTotalNumberOfScratchcards() {
+        String[] data = getDataAsArrayOfDataFileLines();
+
+        Map<Integer, Integer> matchingNumbersForCardIds = Stream.of(data)
+                .map(Card::transform)
+                .collect(Collectors.toMap(Card::cardIndex, Card::calculateIntersectionCardinality));
+
+        HashMap<Integer, Integer> mutableMapToIterativeCalculationOfCardCopies = new HashMap<>(
+                Stream.of(data)
+                        .map(Card::transform)
+                        .collect(Collectors.toMap(Card::cardIndex, d->1))
+        );
+
+        for (int i = 1; i <= data.length; i++) {
+            for (int j = 1; j <= matchingNumbersForCardIds.get(i); j++) {
+                mutableMapToIterativeCalculationOfCardCopies.put(i+j,
+                        mutableMapToIterativeCalculationOfCardCopies.get(i) + mutableMapToIterativeCalculationOfCardCopies.get(i+j)
+                );
+            }
+        }
+
+        return mutableMapToIterativeCalculationOfCardCopies;
     }
 }
