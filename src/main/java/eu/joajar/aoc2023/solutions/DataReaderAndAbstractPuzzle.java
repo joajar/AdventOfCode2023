@@ -6,13 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public abstract class DataReaderAndAbstractPuzzle {
     private final String fileName;
+    protected final String[] data;
 
-    public DataReaderAndAbstractPuzzle(String fileName) {
+    protected DataReaderAndAbstractPuzzle(String fileName) {
         this.fileName = fileName;
+        this.data = getDataAsArrayOfDataFileLines();
     }
 
     public abstract int getDayNumber();
@@ -56,9 +57,5 @@ public abstract class DataReaderAndAbstractPuzzle {
             }
         }
         throw new IllegalStateException("Data not found!");
-    }
-
-    public Stream<String> getDataAsStreamOfDataFileLines() {
-        return Stream.of(getDataAsArrayOfDataFileLines());
     }
 }

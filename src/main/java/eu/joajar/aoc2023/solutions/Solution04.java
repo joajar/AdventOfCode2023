@@ -20,7 +20,7 @@ public class Solution04 extends DataReaderAndAbstractPuzzle {
 
     @Override
     public String solveFirstPart() {
-        final int totalNumberOfPoints = getDataAsStreamOfDataFileLines()
+        final int totalNumberOfPoints = Stream.of(data)
                 .map(Card::transform)
                 .mapToInt(Card::calculatePoints)
                 .sum();
@@ -75,8 +75,6 @@ public class Solution04 extends DataReaderAndAbstractPuzzle {
     }
 
     private Map<Integer, Integer> calculateTotalNumberOfScratchcards() {
-        String[] data = getDataAsArrayOfDataFileLines();
-
         Map<Integer, Integer> matchingNumbersForCardIds = Stream.of(data)
                 .map(Card::transform)
                 .collect(Collectors.toMap(Card::cardIndex, Card::calculateIntersectionCardinality));

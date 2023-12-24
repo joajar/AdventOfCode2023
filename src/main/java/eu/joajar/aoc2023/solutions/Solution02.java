@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class Solution02 extends DataReaderAndAbstractPuzzle {
+
     public Solution02(String fileName) {
         super(fileName);
     }
@@ -16,7 +17,7 @@ public class Solution02 extends DataReaderAndAbstractPuzzle {
 
     @Override
     public String solveFirstPart() {
-        final int sumOfIdsForPossibleGames = getDataAsStreamOfDataFileLines()
+        final int sumOfIdsForPossibleGames = Stream.of(data)
                 .map(Game::transformStringIntoGame)
                 .filter(Game::isGamePossible)
                 .mapToInt(game -> game.id)
@@ -26,7 +27,7 @@ public class Solution02 extends DataReaderAndAbstractPuzzle {
 
     @Override
     public String solveSecondPart() {
-        final int sumOfPowersOfSetsMinimalPossibleCardinalities = getDataAsStreamOfDataFileLines()
+        final int sumOfPowersOfSetsMinimalPossibleCardinalities = Stream.of(data)
                 .map(Game::transformStringIntoGame)
                 .mapToInt(Game::getPowerOfSetsMinimalPossibleCardinalitiesFor)
                 .sum();
@@ -88,6 +89,14 @@ public class Solution02 extends DataReaderAndAbstractPuzzle {
                     .reduce((a,b) -> a*b)
                     .orElse(0);
         }
+
+        private static int getMaximalNumberOfCubesOfGivenColor(Game game, Color givenColorEnum) {
+            return game.listOfCubes.stream()
+                    .filter(cubes -> givenColorEnum == cubes.color)
+                    .mapToInt(cubes -> cubes.number)
+                    .max()
+                    .orElse(0);
+        }
     }
 
     private enum Color {
@@ -96,13 +105,5 @@ public class Solution02 extends DataReaderAndAbstractPuzzle {
         private static Stream<Color> stream() {
             return Stream.of(Color.values());
         }
-    }
-
-    private static int getMaximalNumberOfCubesOfGivenColor(Game game, Color givenColorEnum) {
-        return game.listOfCubes.stream()
-                .filter(cubes -> givenColorEnum == cubes.color)
-                .mapToInt(cubes -> cubes.number)
-                .max()
-                .orElse(0);
     }
 }

@@ -1,7 +1,7 @@
 package eu.joajar.aoc2023.solutions;
 
-import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class Solution01 extends DataReaderAndAbstractPuzzle {
     private final Map<String, String> theMapping = Map.of(
@@ -27,7 +27,7 @@ public class Solution01 extends DataReaderAndAbstractPuzzle {
 
     @Override
     public String solveFirstPart() {
-        long result = getDataAsStreamOfDataFileLines()
+        long result = Stream.of(data)
                 .mapToInt(this::removeLettersAndFormNumberConsistedOfFirstAndLastDigitElseZero)
                 .sum();
 
@@ -36,7 +36,7 @@ public class Solution01 extends DataReaderAndAbstractPuzzle {
 
     @Override
     public String solveSecondPart() {
-        long result = Arrays.stream(getDataAsArrayOfDataFileLines())
+        long result = Stream.of(data)
                 .map(this::exchangeWordsWithDigits)
                 .mapToInt(this::removeLettersAndFormNumberConsistedOfFirstAndLastDigitElseZero)
                 .sum();
