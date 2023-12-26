@@ -12,6 +12,7 @@ Current status of my work:
 ![](https://badgen.net/badge/01/%E2%98%85%E2%98%85/blue)
 ![](https://badgen.net/badge/02/%E2%98%85%E2%98%85/blue)
 ![](https://badgen.net/badge/04/%E2%98%85%E2%98%85/blue)
+![](https://badgen.net/badge/06/%E2%98%85/blue)
 
 
 #### Table of contents: ####
@@ -19,6 +20,7 @@ Current status of my work:
 * **Day 01:** [Quest](https://adventofcode.com/2023/day/1) - [Solution](src/main/java/eu/joajar/aoc2023/solutions/Solution01.java) - [Tests](src/test/java/eu/joajar/aoc2023/solutions/Solution01Test.java)
 * **Day 02:** [Quest](https://adventofcode.com/2023/day/2) - [Solution](src/main/java/eu/joajar/aoc2023/solutions/Solution02.java) - [Tests](src/test/java/eu/joajar/aoc2023/solutions/Solution02Test.java)
 * **Day 04:** [Quest](https://adventofcode.com/2023/day/4) - [Solution](src/main/java/eu/joajar/aoc2023/solutions/Solution04.java) - [Tests](src/test/java/eu/joajar/aoc2023/solutions/Solution04Test.java)
+* **Day 06:** [Quest](https://adventofcode.com/2023/day/6) - [Solution](src/main/java/eu/joajar/aoc2023/solutions/Solution06.java) - [Tests](src/test/java/eu/joajar/aoc2023/solutions/Solution06Test.java)
 
 
 
